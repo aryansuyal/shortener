@@ -1,5 +1,5 @@
 const express = require("express");
-const {connectToMongo} = require("./connection");
+const {connectToMongo} = require("./connection")
 const urlRoute = require("./routes/url");
 const { log } = require("node:console");
 const app = express();
@@ -10,4 +10,4 @@ connectToMongo("mongodb://127.0.0.1:27017/short-url").then(() => console.log("Mo
 
 app.use("/url", urlRoute);
 
-app.listen(PORT, () => console.log`Server started on PORT = ${PORT}`);
+app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`));
