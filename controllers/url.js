@@ -1,5 +1,6 @@
 const { nanoid } = require("nanoid");
 const URL = require("../models/url");
+const { resourceLimits } = require("node:worker_threads");
 
 async function handlegenNewshortURL(req, res) {
     const body = req.body;
@@ -15,6 +16,18 @@ async function handlegenNewshortURL(req, res) {
     return res.json({id : shortID});
 }
 
+async function handleGetAnalytics(req, res){
+    const shortId = req.params.shortId;
+    const result  = await URL.findOne({shortId});
+    return res.json({
+        totalClicks : result.visitHistory.length,
+        analytics: result.visitHistory,
+    });
+}
+
+
+
 module.exports = {
     handlegenNewshortURL,
+    handleGetAnalytics
 }
